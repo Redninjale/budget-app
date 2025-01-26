@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Budget from './components/Budget';
 import GachaShop from './components/GachaShop';
-import bg from './assets/currencybg.png';
-import currency from './assets/currencyIcon.png';
 
 const App = () => {
 
@@ -41,12 +39,6 @@ const App = () => {
           </Routes>
         </div>
       </Router>
-      <div className='flex flex-row items-center special-text text-3xl absolute bottom-0 left-0 gap-2 bg-cover h-15 w-40' style={{backgroundImage : `url(${bg})`}}>
-        <Router>
-          <img className='w-6 h-6' src={currency}></img>
-          <div>1000</div>
-        </Router>
-      </div>
     </div>
   );
 };
