@@ -27,8 +27,8 @@ const Shop = () => {
   };
 
   return (
-    <div className="special-text pt-10 bg-opacity-80 p-6 rounded-2xl mx-auto">
-      <h1 className="text-3xl text-pastel-blue text-center mb-6">Shop</h1>
+    <div className="special-text pt-5 bg-opacity-80 p-6 rounded-2xl mx-auto">
+      <h1 className="text-3xl text-center mb-6">Shop</h1>
 
       {/* Shop Items */}
       <div className="grid grid-cols-2 gap-6">
@@ -44,7 +44,7 @@ const Shop = () => {
               <p className="font-medium">{item.price} Pawcoins</p>
             </div>
             <button
-              className={`px-4 py-2 rounded-lg shadow-md transition font-bold ${
+              className={`px-4 py-2 rounded-xl border-4 transition font-bold ${
                 purchasedItems.includes(item.name)
                   ? 'bg-gray-400 text-white cursor-not-allowed'
                   : 'bg-green-500 hover:bg-green-600 text-black'
