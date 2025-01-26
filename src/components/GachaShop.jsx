@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Gacha from './GachaShop/Gacha';
 import Shop from './GachaShop/Shop';
 
-import shopbutton from '../assets/shopbutton3.png';
+import shopbutton from '../assets/shopbutton.png';
 import shopbutton2 from '../assets/shopbutton2.png';
 
 const GachaShop = () => {
