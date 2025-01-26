@@ -1,30 +1,16 @@
 import React from 'react';
-import bgImage from '../../assets/menubutton.png';
+import gachaMachine from '../../assets/catmachine.png';
 
 const Gacha = () => {
-  console.log("fljeiojf");
   return (
-    <main className="bg-[url('./assets/test.png')] bg-cover flex h-screen w-screen">
-        {/* <div className="relative z-10 flex flex-col items-center justify-center h-full">
+    <main className="bg-[url('./assets/gachabackground.png')] bg-cover flex h-screen w-screen -m-5 -mt-35">
 
-        </div> */}
+    <div className="flex items-center justify-center">
+      <img src={gachaMachine} alt="gacha machine"/>
+    </div>
+
+      {/* <img src={gachaMachine} alt="gacha machine" className="w-1/2 h-1/2" /> */}
     </main>
-
-    // <div
-    //   className="w-screen h-screen text-center overflow-hidden bg-cover"
-    //   style={{
-    //     backgroundImage: `url(${bgImage})`,
-    //     backgroundSize: 'cover', // Ensures the image covers the container
-    //     backgroundPosition: 'center', // Centers the image
-    //     backgroundRepeat: 'no-repeat', // Prevents tiling if the image is smaller
-    //   }}
-    // >
-    //   <div className="relative z-10 flex flex-col items-center justify-center h-full">
-    //     <h1 className="text-2xl font-bold text-white">Gacha Machine</h1>
-    //     <p className="text-gray-200 mt-2">Roll for a chance to collect new cats!</p>
-    //     <button className="mt-4 py-2 px-6 bg-yellow-400 text-white rounded-lg">Roll</button>
-    //   </div>
-    // </div>
   );
 };
 

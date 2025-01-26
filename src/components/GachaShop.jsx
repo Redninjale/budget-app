@@ -7,7 +7,7 @@ const GachaShop = () => {
 
   return (
     <div className="p-4 pt-16">
-      <div className="flex justify-center space-x-4">
+      {/* <div className="flex justify-center space-x-4 absolute ms-15 top-30">
         <button
           onClick={() => setView('gacha')}
           className={`py-2 px-4 rounded-lg ${view === 'gacha' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
@@ -20,7 +20,7 @@ const GachaShop = () => {
         >
           Shop
         </button>
-      </div>
+      </div> */}
       <div className="mt-6">
         {view === 'gacha' ? <Gacha /> : <Shop />}
       </div>
