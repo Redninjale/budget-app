@@ -18,7 +18,7 @@ const Shop = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center gap-4 pt-2">
+    <div className="flex flex-col items-center gap-4 pt-6">
       <div className='custom-darkbeige-bg w-70 rounded-md'>
         <h1 className="special-text font-bold text-center">Shop Accessories</h1>
       </div>
