@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000'; // Adjust the base URL as needed
+const API_BASE_URL = 'http://localhost:5000/api'; // Adjust the base URL as needed
 
 export const getCategories = async () => {
     try {
@@ -25,8 +25,12 @@ export const getPurchasesByCategoryAndAccount = async (category, accountId) => {
 export const getCategoryPurchases = async (category, month, year) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/categories/${category}/purchases`, {
-            params: { month, year }
+            params: { month, year },
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
         });
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching category purchases:', error);
