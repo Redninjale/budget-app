@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import gachaButton from '../assets/wishbutton.png';
 
 const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
   // State to track the current GIF
@@ -22,12 +23,16 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
   }, [gif, initialGif, clickedGif]); // Effect will run when gif state changes
 
   return (
+    <div>
     <img
       src={gif} // Use the current gif source
       className="cursor-pointer"
       alt="GIF"
-      onClick={changeGif} // Change the GIF when clicked
     />
+    <button className="!bg-transparent !border-none flex items-center justify-center " onClick={changeGif}>
+      <img src={gachaButton} alt="gacha button" className="flex items-center justify-center bg-transparent w-3/4" />
+
+    </button></div>
   );
 };
 
