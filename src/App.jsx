@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Budget from './components/Budget';
@@ -6,8 +6,29 @@ import GachaShop from './components/GachaShop';
 import bg from './assets/currencybg.png';
 import currency from './assets/currencyIcon.png';
 import ticket from './assets/ticketIcon.png';
+import { createContext } from 'react';
+
+export const TicketsContext = createContext();
+export const PawCoinContext = createContext();
 
 const App = () => {
+  const [pawCoins, setPawCoins] = useState(1000);
+  const [tickets, setTickets] = useState(100);
+
+  useEffect(() => {
+    if (localStorage.getItem("pawCoins")) {
+      setPawCoins(localStorage.getItem("pawCoins"));
+    } else {
+      localStorage.setItem("pawCoints", pawCoins);
+    }
+
+    if (localStorage.getItem("tickets")) {
+      setTickets(localStorage.getItem("tickets"));
+    } else {
+      localStorage.setItem("tickets", tickets);
+    }
+  }, [])
+
   return (
     <div className="min-h-screen flex flex-col items-center">
       <Router>
@@ -47,14 +68,18 @@ const App = () => {
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="flex">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/budget" element={<Budget />} />
-            <Route path="/gacha-shop" element={<GachaShop />} />
-          </Routes>
-        </div>
+        {/* /* Main Content */}
+        <PawCoinContext.Provider value={{ pawCoins, setPawCoins }}>
+          <TicketsContext.Provider value={{ tickets, setTickets }}>
+            <div className="flex">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/budget" element={<Budget />} />
+                <Route path="/gacha-shop" element={<GachaShop />} />
+              </Routes>
+            </div>
+          </TicketsContext.Provider>
+        </PawCoinContext.Provider>
       </Router>
 
       {/* Currency Section */}
@@ -69,13 +94,13 @@ const App = () => {
         {/* Currency Icon and Amount */}
         <div className="flex flex-row items-center justify-center gap-1">
           <img className="w-10 h-6 pl-3" src={currency} alt="Currency" />
-          <div className="text-center text-white text-xl font-bold">1000</div>
+          <div className="text-center text-white text-xl font-bold">{pawCoins}</div>
         </div>
 
         {/* Ticket Icon and Amount */}
         <div className="flex flex-row items-center justify-center gap-1">
           <img className="w-6 h-6" src={ticket} alt="Ticket" />
-          <div className="text-center text-white text-xl font-bold">50</div>
+          <div className="text-center text-white text-xl font-bold">{tickets}</div>
         </div>
       </div>
     </div>
