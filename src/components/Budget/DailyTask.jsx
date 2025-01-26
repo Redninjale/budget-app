@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { PawCoinContext } from '../../App';
 
 const DailyTask = ({ task = "Placeholder task from LLM" }) => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [pawCoins, setPawCoins] = useState(0);
+  const { pawCoins, setPawCoins } = useContext(PawCoinContext);
   const [timeRemaining, setTimeRemaining] = useState(() => {
     const now = new Date();
     const nextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
@@ -36,7 +37,11 @@ const DailyTask = ({ task = "Placeholder task from LLM" }) => {
 
   const handleComplete = () => {
     const generatedPawCoins = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
-    setPawCoins(generatedPawCoins);
+    const currentPawCoins = parseInt(localStorage.getItem('pawCoins')) || 0; // Parse stored value or default to 0
+    const updatedPawCoins = currentPawCoins + generatedPawCoins;
+
+    localStorage.setItem('pawCoins', updatedPawCoins); // Store updated value
+    setPawCoins(updatedPawCoins); // Update state
     setIsCompleted(true);
     setShowPopup(true);
   };

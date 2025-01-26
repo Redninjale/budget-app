@@ -24,9 +24,8 @@ def parse_json_to_dict(json_file):
     return merchant, category
 
 merchant_id_data, category_data = parse_json_to_dict('output.json')
-
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route("/api/")
