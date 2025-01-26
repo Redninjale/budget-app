@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DailyTask from './Budget/DailyTask';
 import budgetBackground from '../assets/budgetbackground.gif';
 import CategoryList from './Budget/CategoryList';
 import Savings from './Budget/Savings';
+import { getCategoryPurchases } from '../api/categories';
 
 const Budget = () => {
   const [activeTab, setActiveTab] = useState('Budget'); // State for toggling tabs
@@ -18,9 +19,9 @@ const Budget = () => {
   ];
   const totalSaved = savingsDeposits.reduce((sum, deposit) => sum + deposit.amount, 0);
 
-  const categories = [
+  const [categories, setCategories] = useState([
     {
-      name: 'HOUSE & UTILITIES',
+      name: 'House & Utilities',
       icon: 'src/assets/house_cat.png',
       transactions: [
         {
@@ -42,7 +43,7 @@ const Budget = () => {
       ],
     },
     {
-      name: 'FOOD & DRINKS',
+      name: 'Food & Drinks',
       icon: 'src/assets/food_cat.png',
       transactions: [
         {
@@ -64,7 +65,7 @@ const Budget = () => {
       ],
     },
     {
-      name: 'PERSONAL',
+      name: 'Personal',
       icon: 'src/assets/personal_cat.png',
       transactions: [
         {
@@ -78,7 +79,7 @@ const Budget = () => {
       ],
     },
     {
-      name: 'SHOPPING',
+      name: 'Shopping',
       icon: 'src/assets/shop_cat.png',
       transactions: [
         {
@@ -92,7 +93,7 @@ const Budget = () => {
       ],
     },
     {
-      name: 'SUBSCRIPTIONS',
+      name: 'Subscriptions',
       icon: 'src/assets/sub_cat.png',
       transactions: [
         {
@@ -113,7 +114,25 @@ const Budget = () => {
         },
       ],
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    const fetchCategoryPurchases = async () => {
+      const updatedCategories = await Promise.all(
+        categories.map(async (category) => {
+          const purchases = await getCategoryPurchases(category.name, "01", "2024");
+          return {
+            ...category,
+            transactions: [...category.transactions, ...purchases.transactions],
+          };
+        })
+      );
+      console.log(updatedCategories);
+      setCategories(updatedCategories);
+    };
+
+    fetchCategoryPurchases();
+  }, []);
 
   const calculateMonthlyRecap = () => {
     const totalSpent = categories.reduce((sum, category) => {
@@ -138,17 +157,15 @@ const Budget = () => {
       {/* Tabs */}
       <div className="flex text-xl justify-center special-text space-x-4">
         <button
-          className={`px-4 font-bold border-solid border-2 rounded-md shadow-md transition ${
-            activeTab === 'Budget' ? 'text-blue-400' : 'text-gray-400'
-          }`}
+          className={`px-4 font-bold border-solid border-2 rounded-md shadow-md transition ${activeTab === 'Budget' ? 'text-blue-400' : 'text-gray-400'
+            }`}
           onClick={() => setActiveTab('Budget')}
         >
           Budget
         </button>
         <button
-          className={`px-4 py-2 font-bold border-solid border-2 rounded-md shadow-md transition ${
-            activeTab === 'Savings' ? 'text-blue-400' : 'text-gray-400'
-          }`}
+          className={`px-4 py-2 font-bold border-solid border-2 rounded-md shadow-md transition ${activeTab === 'Savings' ? 'text-blue-400' : 'text-gray-400'
+            }`}
           onClick={() => setActiveTab('Savings')}
         >
           Savings
@@ -201,9 +218,8 @@ const Budget = () => {
                   </p>
                   <div className="h-4 rounded-lg overflow-hidden bg-gray-200">
                     <div
-                      className={`h-full ${
-                        totalSpent > totalBudget ? 'bg-red-500' : 'bg-green-500'
-                      }`}
+                      className={`h-full ${totalSpent > totalBudget ? 'bg-red-500' : 'bg-green-500'
+                        }`}
                       style={{ width: `${Math.min((totalSpent / totalBudget) * 100, 100)}%` }}
                     ></div>
                   </div>
@@ -224,9 +240,8 @@ const Budget = () => {
                   </p>
                   <div className="h-4 rounded-lg overflow-hidden bg-gray-200">
                     <div
-                      className={`h-full ${
-                        totalSaved >= savingsGoal ? 'bg-green-500' : 'bg-blue-500'
-                      }`}
+                      className={`h-full ${totalSaved >= savingsGoal ? 'bg-green-500' : 'bg-blue-500'
+                        }`}
                       style={{ width: `${Math.min((totalSaved / savingsGoal) * 100, 100)}%` }}
                     ></div>
                   </div>
