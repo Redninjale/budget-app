@@ -1,18 +1,27 @@
 import React from 'react';
 
+import bow from '../../assets/bow.png';
+
 const Shop = () => {
-  const items = ['Bow Tie', 'Top Hat', 'Flower Crown'];
+  const items = [
+    { img: bow },
+    { img: '/images/top-hat.png' },
+    { img: '/images/flower-crown.png' },
+  ];
 
   return (
-    <div>
-      <h1 className="special-text text-2xl font-bold text-center">Shop Accessories</h1>
-      <div className="grid grid-cols-3 gap-4 mt-6">
+    <div className="p-4">
+      <h1 className="special-text font-bold text-center">Shop Accessories</h1>
+      <div className="bg-brown-500 grid grid-cols-3 gap-7 transform scale-90">
         {items.map((item) => (
           <div
-            key={item}
-            className="special-text py-4 px-4 bg-gray-100 text-center rounded-lg shadow-md"
+            key={item.name}
+            className="border-4 border-indigo-500 rounded-lg"
           >
-            {item}
+            <img
+              src={item.img}
+              className="mx-auto rounded-lg"
+            />
           </div>
         ))}
       </div>
