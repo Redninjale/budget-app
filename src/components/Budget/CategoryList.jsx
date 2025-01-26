@@ -128,8 +128,8 @@ const CategoryList = ({ categories }) => {
 
       {/* Transaction Popup */}
       {selectedCategory && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-md relative">
+        <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white border-solid border-4 rounded-3xl p-6 w-3/4 max-w-md relative">
             <button
               className="absolute top-2 right-2 bg-gray-700 text-black rounded-full w-6 h-6 flex items-center justify-center hover:bg-gray-800"
               onClick={() => setSelectedCategory(null)} // Close the pop-up

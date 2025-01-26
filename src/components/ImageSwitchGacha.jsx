@@ -54,7 +54,7 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
 
       {/* Popup displaying the random cat */}
       {showPopup && randomCat && (
-        <div className="absolute top-1/2 special-text left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border rounded-lg shadow-lg p-4 w-5/6 max-w-lg">
+        <div className="absolute top-1/2 special-text left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-30 backdrop-blur-sm bg-white border-4 border-solid rounded-lg shadow-lg p-6 w-5/6 max-w-lg">
           <button
             className="absolute top-2 right-2 bg-red-500 text-black rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
             onClick={() => setShowPopup(false)} // Close the popup
@@ -64,7 +64,7 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
           <img
             src={randomCat.icon}
             alt={randomCat.name}
-            className="w-32 h-32 mx-auto"
+            className="w-30 h-25 mx-auto"
           />
           <h2 className="text-xl font-bold text-center mt-4">{randomCat.name}</h2>
           <p className="text-gray-600 text-center mt-2">{randomCat.description}</p>

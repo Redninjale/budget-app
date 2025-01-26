@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import Gacha from './GachaShop/Gacha';
 import Shop from './GachaShop/Shop';
+import greenBackground from '../assets/greenstripe.gif';
+
 
 const GachaShop = () => {
   const [activeTab, setActiveTab] = useState('Gacha'); // State for toggling tabs
 
   return (
     <div
-      className="flex flex-col pt-20 bg-[url('./assets/greenstripe.gif')] bg-cover bg-no-repeat min-h-screen"
-      style={{ backgroundSize: 'cover', height: '100%' }}
-    >
+    className="p-4 pt-25 min-h-screen bg-cover bg-center w-screen"
+    style={{ backgroundImage: `url(${greenBackground})` }}
+  >
       {/* Tabs */}
       <div className="flex text-xl justify-center special-text space-x-4 pt-10">
         <button
