@@ -134,7 +134,7 @@ const CategoryList = ({ categories }) => {
             </ul>
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 };
