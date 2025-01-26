@@ -3,7 +3,7 @@ import gachaMachine from '../../assets/catmachine.png';
 
 const Gacha = () => {
   return (
-    <main className="bg-[url('./assets/gachabackground.png')] bg-cover flex h-screen w-screen -m-5 -mt-35">
+    <main className="">
 
     <div className="flex items-center justify-center">
       <img src={gachaMachine} alt="gacha machine"/>
