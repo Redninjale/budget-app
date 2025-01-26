@@ -3,6 +3,7 @@ import requests
 from dotenv import load_dotenv
 import os
 import json
+from db import create_goal, update_goal, delete_goal, read_goal, get_all
 load_dotenv()
 
 CAPITAL_ONE_API_KEY = os.getenv('CAPITAL_ONE_API_KEY')
@@ -113,7 +114,36 @@ def get_purchase_by_id(purchase_id):
         return jsonify({'error': 'Failed to get purchase'}), response.status_code
     return jsonify(response.json()), 200
 
+# Goals
+@app.route('/goals', methods=['POST'])
+def create_new_goal():
+    data = request.json
+    goal_id = create_goal(data['goal_name'], data['time_limit'], data['goal_amount'], data['reward'])
+    return jsonify({'goal_id': goal_id}), 201
+
+@app.route('/goals/<int:goal_id>', methods=['PUT'])
+def update_existing_goal(goal_id):
+    data = request.json
+    update_goal(goal_id, data)
+    return jsonify({'message': 'Goal updated successfully'}), 200
+
+@app.route('/goals/<int:goal_id>', methods=['DELETE'])
+def delete_existing_goal(goal_id):
+    delete_goal(goal_id)
+    return jsonify({'message': 'Goal deleted successfully'}), 200
+
+@app.route('/goals/<int:goal_id>', methods=['GET'])
+def get_goal_by_id(goal_id):
+    goal = read_goal(goal_id)
+    if goal:
+        return jsonify(goal), 200
+    else:
+        return jsonify({'error': 'Goal not found'}), 404
+
+@app.route('/goals', methods=['GET'])
+def get_all_goals():
+    goals = get_all()
+    return jsonify(goals), 200
 
 if __name__ == '__main__':
-    
     app.run(debug=True)
