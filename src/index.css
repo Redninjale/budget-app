@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss";  
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -8,6 +8,9 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  --custom-beige: #F5DFBA;
+  --custom-dark-beige: #d7bf95;
+  --custom-darker-beige: #ba9e6e;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -60,3 +63,30 @@ h1 {
   font-family: 'CustomFont', sans-serif;
 }
 
+.custom-beige-bg {
+  background-color: var(--custom-beige);
+}
+
+.custom-beige-text {
+  color: var(--custom-beige);
+}
+
+.custom-darkbeige-bg {
+  background-color: var(--custom-dark-beige);
+}
+
+.custom-darkbeige-text {
+  color: var(--custom-dark-beige);
+}
+
+.custom-darkerbeige-bg {
+  background-color: var(--custom-darker-beige);
+}
+
+.custom-darkerbeige-border {
+  border-color: var(--custom-darker-beige);
+}
+
+.custom-darkerbeige-text {
+  color: var(--custom-darker-beige);
+}
