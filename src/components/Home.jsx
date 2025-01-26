@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ImageSwitch from './imageSwitch';
+import ImageSwitch from './ImageSwitch';
 
 import initialGif1 from "../assets/white-cat-idle.png"; // Default GIF
 import otherGif1 from "../assets/white-cat-idle.gif"; // The GIF to switch to
