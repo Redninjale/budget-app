@@ -4,6 +4,9 @@ import budgetData from '../../assets/data/budget.json'; // Assume this is the JS
 const CategoryList = ({ categories }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [budgets, setBudgets] = useState(budgetData); // Editable budgets state
+  const [filter, setFilter] = useState('all'); // State for filter
+  const [sortOrder, setSortOrder] = useState('none'); // State for sorting categories
+  const [transactionSortOrder, setTransactionSortOrder] = useState('none'); // State for sorting transactions
 
   const calculateProgress = (transactions, budget) => {
     const totalSpent = transactions.reduce((sum, t) => {
@@ -25,21 +28,70 @@ const CategoryList = ({ categories }) => {
     }));
   };
 
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const handleSortChange = () => {
+    setSortOrder((prev) => (prev === 'low-to-high' ? 'high-to-low' : 'low-to-high'));
+  };
+
+  const handleTransactionSortChange = () => {
+    setTransactionSortOrder((prev) =>
+      prev === 'low-to-high' ? 'high-to-low' : 'low-to-high'
+    );
+  };
+
+  const filteredCategories = categories.filter((category) => {
+    const budgetInfo = budgets[category.name] || { budget: 100 };
+    const { totalSpent } = calculateProgress(category.transactions || [], budgetInfo.budget);
+
+    if (filter === 'over') return totalSpent > budgetInfo.budget;
+    if (filter === 'under') return totalSpent <= budgetInfo.budget;
+    return true; // 'all'
+  });
+
+  const sortedCategories = filteredCategories.sort((a, b) => {
+    const budgetA = budgets[a.name]?.budget || 100;
+    const budgetB = budgets[b.name]?.budget || 100;
+    const spentA = calculateProgress(a.transactions || [], budgetA).totalSpent;
+    const spentB = calculateProgress(b.transactions || [], budgetB).totalSpent;
+
+    if (sortOrder === 'low-to-high') return spentA - spentB;
+    if (sortOrder === 'high-to-low') return spentB - spentA;
+    return 0; // Default, no sorting
+  });
+
   return (
     <div>
+      {/* Filter and Sort Controls */}
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <label className="mr-2">Filter:</label>
+          <select
+            value={filter}
+            onChange={handleFilterChange}
+            className="border-4 border-black-300 border-solid rounded-lg p-2"
+          >
+            <option value="all">All</option>
+            <option value="over">Over Budget</option>
+            <option value="under">Under Budget</option>
+          </select>
+        </div>
+        <button
+          onClick={handleSortChange}
+          className="bg-blue-500 text-black border-4 border-solid px-4 py-2 rounded-lg hover:bg-blue-600"
+        >
+          Sort: {sortOrder === 'low-to-high' ? 'Low to High' : 'High to Low'}
+        </button>
+      </div>
+
       {/* Categories Grid */}
       <div className="grid grid-cols-2 gap-6">
-        {categories.map((category) => {
+        {sortedCategories.map((category) => {
           const budgetInfo = budgets[category.name] || { budget: 100 }; // Default budget is 100
           const { totalSpent, progress } = calculateProgress(category.transactions || [], budgetInfo.budget);
           const isOverBudget = totalSpent > budgetInfo.budget;
-
-          // Debugging information
-          console.log(`Category: ${category.name}`);
-          console.log(`Budget: ${budgetInfo.budget}`);
-          console.log(`Total Spent: ${totalSpent}`);
-          console.log(`Progress: ${progress}%`);
-          console.log(`Is Over Budget: ${isOverBudget}`);
 
           return (
             <div
@@ -68,9 +120,6 @@ const CategoryList = ({ categories }) => {
                     ? `${(totalSpent - budgetInfo.budget).toFixed(2)} over`
                     : `${(budgetInfo.budget - totalSpent).toFixed(2)} under`}
                 </p>
-                {/* <p className="text-center mt-1 text-sm font-medium text-gray-800">
-                  Budget: ${budgetInfo.budget.toFixed(2)}
-                </p> */}
               </div>
             </div>
           );
@@ -91,46 +140,39 @@ const CategoryList = ({ categories }) => {
               {selectedCategory.name}
             </h2>
 
-            {/* Budget and Progress */}
-            <div className="mb-4">
-              <p className="text-center text-gray-800 font-medium">
-                Budget: ${budgets[selectedCategory.name]?.budget.toFixed(2) || 100}
-              </p>
-              <div className="h-4 rounded-lg overflow-hidden bg-gray-200">
-                <div
-                  className={`h-full ${calculateProgress(selectedCategory.transactions, budgets[selectedCategory.name]?.budget || 100).totalSpent > (budgets[selectedCategory.name]?.budget || 100) ? 'bg-red-500' : 'bg-green-500'}`}
-                  style={{
-                    width: `${Math.min(
-                      calculateProgress(selectedCategory.transactions, budgets[selectedCategory.name]?.budget || 100).progress,
-                      100
-                    )}%`,
-                  }}
-                ></div>
-              </div>
+            {/* Transaction Sort Controls */}
+            <div className="flex justify-center items-center mb-4">
+              {/* <h3 className="text-md font-semibold text-gray-800">Transactions</h3> */}
+              <button
+                onClick={handleTransactionSortChange}
+                className="bg-blue-500 text-black border-4 border-solid p-2 rounded-lg hover:bg-blue-600"
+              >
+                Sort: {transactionSortOrder === 'low-to-high' ? 'Low to High' : 'High to Low'}
+              </button>
             </div>
 
-            {/* Edit Budget */}
-            <div className="mb-4">
-              <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-                Edit Budget:
-              </label>
-              <input
-                type="number"
-                id="budget"
-                className="border border-gray-300 rounded-lg p-2 w-full"
-                defaultValue={budgets[selectedCategory.name]?.budget || 100}
-                onBlur={(e) => handleBudgetChange(selectedCategory.name, e.target.value)}
-              />
-            </div>
-
+            {/* Transaction List */}
             <ul className="space-y-2">
-              {selectedCategory.transactions.map((transaction, index) => (
-                <li key={index} className="border border-gray-300 p-3 rounded-md">
-                  <p><strong>Amount:</strong> ${transaction.amount}</p>
-                  <p><strong>Status:</strong> {transaction.status}</p>
-                  <p><strong>Description:</strong> {transaction.description}</p>
-                </li>
-              ))}
+              {selectedCategory.transactions
+                .slice()
+                .sort((a, b) =>
+                  transactionSortOrder === 'low-to-high'
+                    ? parseFloat(a.amount) - parseFloat(b.amount)
+                    : parseFloat(b.amount) - parseFloat(a.amount)
+                )
+                .map((transaction, index) => (
+                  <li key={index} className="border border-gray-300 p-3 rounded-md">
+                    <p>
+                      <strong>Amount:</strong> ${transaction.amount}
+                    </p>
+                    <p>
+                      <strong>Status:</strong> {transaction.status}
+                    </p>
+                    <p>
+                      <strong>Description:</strong> {transaction.description}
+                    </p>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
