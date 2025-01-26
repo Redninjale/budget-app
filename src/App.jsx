@@ -5,30 +5,27 @@ import Budget from './components/Budget';
 import GachaShop from './components/GachaShop';
 import bg from './assets/currencybg.png';
 import currency from './assets/currencyIcon.png';
+import ticket from './assets/ticketIcon.png';
 
 const App = () => {
-
   return (
     <div className="min-h-screen flex flex-col items-center">
       <Router>
         {/* Dropdown Menu */}
         <div className="flex flex-row items-center justify-center absolute p-4">
-          <div className='flex flex-row space-x-4'>
+          <div className="flex flex-row space-x-4">
             <Link
               to="/"
               className="bg-[url('./assets/menubutton.png')] w-18 h-19 items-center justify-center bg-center bg-center rounded-md"
-            >
-            </Link>
+            ></Link>
             <Link
               to="/budget"
               className="bg-[url('./assets/budgetbutton.png')] w-18 h-19 items-center justify-center bg-center bg-center rounded-md"
-            >
-            </Link>
+            ></Link>
             <Link
               to="/Gacha-Shop"
               className="bg-[url('./assets/shopbutton.png')] w-18 h-19 items-center justify-center bg-center bg-center rounded-md"
-            >
-            </Link>
+            ></Link>
           </div>
         </div>
 
@@ -41,11 +38,27 @@ const App = () => {
           </Routes>
         </div>
       </Router>
-      <div className='flex flex-row items-center special-text text-3xl absolute bottom-0 left-0 gap-2 bg-cover h-15 w-40' style={{backgroundImage : `url(${bg})`}}>
-        <Router>
-          <img className='w-6 h-6' src={currency}></img>
-          <div>1000</div>
-        </Router>
+
+      {/* Currency Section */}
+      <div
+        className="flex flex-row items-center fixed bottom-5 left-5 gap-4 p-2 rounded-lg bg-cover bg-no-repeat z-50 shadow-md"
+        style={{
+          backgroundImage: `url(${bg})`,
+          width: '200px',
+          height: '60px',
+        }}
+      >
+        {/* Currency Icon and Amount */}
+        <div className="flex flex-row items-center justify-center gap-1">
+          <img className="w-10 h-6 pl-3" src={currency} alt="Currency" />
+          <div className="text-center text-white text-xl font-bold">1000</div>
+        </div>
+
+        {/* Ticket Icon and Amount */}
+        <div className="flex flex-row items-center justify-center gap-1">
+          <img className="w-6 h-6" src={ticket} alt="Ticket" />
+          <div className="text-center text-white text-xl font-bold">50</div>
+        </div>
       </div>
     </div>
   );
