@@ -4,19 +4,19 @@
         "name": "Snowball",
         "icon": "src/assets/snowball.png",
         "description": "A playful white kitten who loves to chase snowflakes and nap in the sun.",
-        "acquired": false
+        "acquired": true
       },
       {
         "name": "Summer",
         "icon": "src/assets/summer.png",
         "description": "A golden tabby with a sunny disposition, always ready for an adventure.",
-        "acquired": false
+        "acquired": true
       },
       {
         "name": "Bethany",
         "icon": "src/assets/bethany.png",
         "description": "An elegant and calm Siamese cat who adores cozy corners and warm blankets.",
-        "acquired": false
+        "acquired": true
       }
     ],
     "accessories": [

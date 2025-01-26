@@ -37,8 +37,11 @@ const DailyTask = ({ task = "Placeholder task from LLM" }) => {
 
   const handleComplete = () => {
     const generatedPawCoins = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
-    localStorage.setItem("pawCoins", pawCoins + generatedPawCoins);
-    setPawCoins(pawCoins + generatedPawCoins);
+    const currentPawCoins = parseInt(localStorage.getItem('pawCoins')) || 0; // Parse stored value or default to 0
+    const updatedPawCoins = currentPawCoins + generatedPawCoins;
+
+    localStorage.setItem('pawCoins', updatedPawCoins); // Store updated value
+    setPawCoins(updatedPawCoins); // Update state
     setIsCompleted(true);
     setShowPopup(true);
   };
