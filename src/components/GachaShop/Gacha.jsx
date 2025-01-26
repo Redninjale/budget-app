@@ -1,12 +1,16 @@
 import React from 'react';
+import gachaMachine from '../../assets/catmachine.png';
 
 const Gacha = () => {
   return (
-    <div className="text-center">
-      <h1 className="text-2xl font-bold">Gacha Machine</h1>
-      <p className="text-gray-600 mt-2">Roll for a chance to collect new cats!</p>
-      <button className="mt-4 py-2 px-6 bg-yellow-400 text-white rounded-lg">Roll</button>
+    <main className="bg-[url('./assets/gachabackground.png')] bg-cover flex h-screen w-screen -m-5 -mt-35">
+
+    <div className="flex items-center justify-center">
+      <img src={gachaMachine} alt="gacha machine"/>
     </div>
+
+      {/* <img src={gachaMachine} alt="gacha machine" className="w-1/2 h-1/2" /> */}
+    </main>
   );
 };
 
