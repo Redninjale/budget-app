@@ -14,18 +14,36 @@ const App = () => {
         {/* Dropdown Menu */}
         <div className="flex flex-row items-center justify-center absolute p-4">
           <div className="flex flex-row space-x-4">
-            <Link
-              to="/"
-              className="bg-[url('./assets/menubutton.png')] w-18 h-19 items-center justify-center bg-center bg-center rounded-md"
-            ></Link>
-            <Link
-              to="/budget"
-              className="bg-[url('./assets/budgetbutton.png')] w-18 h-19 items-center justify-center bg-center bg-center rounded-md"
-            ></Link>
-            <Link
-              to="/Gacha-Shop"
-              className="bg-[url('./assets/shopbutton.png')] w-18 h-19 items-center justify-center bg-center bg-center rounded-md"
-            ></Link>
+            <div className="flex flex-col items-center">
+              <Link
+                to="/"
+                className="bg-[url('./assets/menubutton.png')] w-18 h-19 items-center justify-center bg-center rounded-md"
+              ></Link>
+              <Link
+                to="/">
+              <p className="text-center text-xl text-black bg-white p-1 border-black border-4 rounded-xl mt-2 special-text">Home</p>
+              </Link>
+            </div>
+            <div className="flex flex-col items-center">
+              <Link
+                to="/budget"
+                className="bg-[url('./assets/budgetbutton.png')] w-18 h-19 items-center justify-center bg-center rounded-md"
+              ></Link>
+              <Link
+                to="/budget">
+              <p className="text-center text-xl text-black bg-white p-1 border-black border-4 rounded-xl mt-2 special-text">Budget</p>
+              </Link>
+            </div>
+            <div className="flex flex-col items-center">
+              <Link
+                to="/Gacha-Shop"
+                className="bg-[url('./assets/shopbutton.png')] w-18 h-19 items-center justify-center bg-center rounded-md"
+              ></Link>
+              <Link
+                to="/Gacha-Shop">
+              <p className="text-center text-xl text-black bg-white p-1 border-black border-4 rounded-xl mt-2 special-text">Gacha</p>
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -41,7 +59,7 @@ const App = () => {
 
       {/* Currency Section */}
       <div
-        className="flex flex-row items-center fixed bottom-5 left-5 gap-4 p-2 rounded-lg bg-cover bg-no-repeat z-50 shadow-md"
+        className="flex flex-row items-center fixed bottom-7 left-2 gap-4 p-2 rounded-lg bg-cover bg-no-repeat z-50 shadow-md"
         style={{
           backgroundImage: `url(${bg})`,
           width: '200px',

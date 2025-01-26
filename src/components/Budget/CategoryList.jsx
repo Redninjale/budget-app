@@ -152,28 +152,31 @@ const CategoryList = ({ categories }) => {
             </div>
 
             {/* Transaction List */}
-            <ul className="space-y-2">
-              {selectedCategory.transactions
-                .slice()
-                .sort((a, b) =>
-                  transactionSortOrder === 'low-to-high'
-                    ? parseFloat(a.amount) - parseFloat(b.amount)
-                    : parseFloat(b.amount) - parseFloat(a.amount)
-                )
-                .map((transaction, index) => (
-                  <li key={index} className="border border-gray-300 p-3 rounded-md">
-                    <p>
-                      <strong>Amount:</strong> ${transaction.amount}
-                    </p>
-                    <p>
-                      <strong>Status:</strong> {transaction.status}
-                    </p>
-                    <p>
-                      <strong>Description:</strong> {transaction.description}
-                    </p>
-                  </li>
-                ))}
-            </ul>
+            <div className="max-h-96 overflow-y-auto bg-gray-100 rounded-lg shadow-inner p-4 border border-gray-300">
+              <ul className="space-y-2">
+                {selectedCategory.transactions
+                  .slice()
+                  .sort((a, b) =>
+                    transactionSortOrder === 'low-to-high'
+                      ? parseFloat(a.amount) - parseFloat(b.amount)
+                      : parseFloat(b.amount) - parseFloat(a.amount)
+                  )
+                  .map((transaction, index) => (
+                    <li key={index} className="border border-gray-300 p-3 rounded-md bg-white shadow-md">
+                      <p>
+                        <strong>Amount:</strong> ${transaction.amount}
+                      </p>
+                      <p>
+                        <strong>Status:</strong> {transaction.status}
+                      </p>
+                      <p>
+                        <strong>Description:</strong> {transaction.description}
+                      </p>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+
           </div>
         </div>
       )}

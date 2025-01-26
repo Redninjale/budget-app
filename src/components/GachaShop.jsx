@@ -13,7 +13,7 @@ const GachaShop = () => {
     style={{ backgroundImage: `url(${greenBackground})` }}
   >
       {/* Tabs */}
-      <div className="flex text-xl justify-center special-text space-x-4 pt-10">
+      <div className="flex text-xl justify-center special-text space-x-4 pt-20">
         <button
           className={`px-4 font-bold border-solid border-2 rounded-md shadow-md transition ${
             activeTab === 'Gacha' ? 'text-green-500' : 'text-gray-400'

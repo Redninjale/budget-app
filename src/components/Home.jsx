@@ -12,10 +12,10 @@ const Home = () => {
   const [showCollection, setShowCollection] = useState(false); // Toggle for popup
 
   return (
-    <main className="bg-[url('./assets/homebackground.png')] bg-cover flex h-screen w-screen">
+    <main className="special-text bg-[url('./assets/homebackground.png')] bg-cover flex h-screen w-screen">
       {/* View Collection Button */}
       <button
-        className="absolute top-5 left-5 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600"
+        className="absolute special-text top-40 p-2 left-1/2 transform -translate-x-1/2 bg-pastel-green border-solid border-4 border-black text-brown-800 font-bold text-xl rounded-2xl shadow-md hover:bg-green-500 transition transform hover:scale-105"
         onClick={() => setShowCollection(true)}
       >
         View Collection
@@ -34,11 +34,11 @@ const Home = () => {
 
       {/* Collection Popup */}
       {showCollection && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white w-4/5 h-4/5 p-6 rounded-lg shadow-lg overflow-y-auto relative">
             {/* Close Button */}
             <button
-              className="absolute top-3 right-3 bg-gray-700 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-800"
+              className="absolute top-3 right-3 bg-gray-700 text-black rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-800"
               onClick={() => setShowCollection(false)}
             >
               &times;
@@ -47,18 +47,18 @@ const Home = () => {
 
             {/* Cats Section */}
             <h3 className="text-xl font-semibold mb-4">Cats</h3>
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-2 gap-3 mb-8">
               {collectionData.cats.map((cat, index) => (
                 <div
                   key={index}
-                  className={`flex flex-col items-center p-4 rounded-lg shadow-md ${
+                  className={`flex flex-col items-center p-7 rounded-lg shadow-md ${
                     cat.acquired ? 'bg-green-100' : 'bg-gray-100'
                   }`}
                 >
                   <img
                     src={cat.icon}
                     alt={cat.name}
-                    className={`w-24 h-24 mb-2 ${
+                    className={`w-12 h-12 mb-2 ${
                       !cat.acquired ? 'opacity-50' : ''
                     }`}
                   />
@@ -83,7 +83,7 @@ const Home = () => {
                   <img
                     src={accessory.icon}
                     alt={accessory.name}
-                    className={`w-24 h-24 mb-2 ${
+                    className={`w-24 h-12 mb-2 ${
                       !accessory.acquired ? 'opacity-50' : ''
                     }`}
                   />
