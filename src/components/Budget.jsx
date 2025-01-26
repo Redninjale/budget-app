@@ -168,7 +168,7 @@ const Budget = () => {
       style={{ backgroundImage: `url(${budgetBackground})` }}
     >
       {/* Tabs */}
-      <div className="flex text-xl justify-center special-text space-x-4">
+      <div className="flex text-xl mt-15 justify-center special-text space-x-4">
         <button
           className={`px-4 font-bold border-solid border-2 rounded-md shadow-md transition ${activeTab === 'Budget' ? 'text-blue-400' : 'text-gray-400'
             }`}
