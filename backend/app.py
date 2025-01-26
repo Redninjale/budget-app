@@ -24,9 +24,8 @@ def parse_json_to_dict(json_file):
     return merchant, category
 
 merchant_id_data, category_data = parse_json_to_dict('output.json')
-
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route("/api/")
@@ -269,5 +268,5 @@ def get_mitral_monthly():
     
 
 if __name__ == '__main__':
-    app.run(debug=True, host="127.0.0.1", port=5000)
+    app.run(debug=True, host="127.0.0.1", port=5001)
     # app.run(debug=True, port=5000)

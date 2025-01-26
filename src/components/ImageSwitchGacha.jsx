@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import gachaButton from '../assets/wishbutton.png';
 import catsData from '../assets/data/catbook.json';
+import { TicketsContext } from '../App';
 
 const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
   const [gif, setGif] = useState(initialGif); // State to track the current GIF
   const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
   const [randomCat, setRandomCat] = useState(null); // State to store the random cat data
+  const { tickets, setTickets } = useContext(TicketsContext);
 
   // Function to change the GIF on click
   const changeGif = () => {
@@ -16,6 +18,8 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
     const randomIndex = Math.floor(Math.random() * catsData.cats.length);
     setRandomCat(catsData.cats[randomIndex]);
 
+    localStorage.setItem("tickets", tickets - 1);
+    setTickets(tickets - 1);
     // Show the popup after 4.5 seconds
     setTimeout(() => {
       setShowPopup(true);
@@ -66,7 +70,7 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
             alt={randomCat.name}
             className="w-30 h-25 mx-auto"
           />
-          <h2 className="text-xl font-bold text-center mt-4">{randomCat.name}</h2>
+          <h2 className="text-xl text-gray-600 font-bold text-center mt-4">{randomCat.name}</h2>
           <p className="text-gray-600 text-center mt-2">{randomCat.description}</p>
         </div>
       )}

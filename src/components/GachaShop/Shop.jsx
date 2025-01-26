@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import currency from '../../assets/currencyIcon.png';
 import bow from '../../assets/bow.png';
 import starcollar from '../../assets/starcollar.png';
@@ -6,18 +6,20 @@ import bellbow from '../../assets/bellbow.png';
 import bluebow from '../../assets/bluebow.png';
 import yellowbow from '../../assets/yellowbow.png';
 import flowercrown from '../../assets/flowercrown.png';
+import { PawCoinContext } from '../../App';
 
 const Shop = () => {
   const [purchasedItems, setPurchasedItems] = useState([]);
   const [popupMessage, setPopupMessage] = useState('');
+  const { pawCoins, setPawCoins } = useContext(PawCoinContext);
 
   const items = [
     { name: 'Bow', price: 50, icon: bow, acquired: false },
-    { name: 'Star Collar', price: 100, icon: starcollar, acquired: false },
-    { name: 'Bell Bow', price: 75, icon: bellbow, acquired: false },
-    { name: 'Blue Bow', price: 60, icon: bluebow, acquired: false },
-    { name: 'Yellow Bow', price: 70, icon: yellowbow, acquired: false },
-    { name: 'Flower Crown', price: 150, icon: flowercrown, acquired: false },
+    { name: 'Star Collar', price: 50, icon: starcollar, acquired: false },
+    { name: 'Bell Bow', price: 50, icon: bellbow, acquired: false },
+    { name: 'Blue Bow', price: 50, icon: bluebow, acquired: false },
+    { name: 'Yellow Bow', price: 50, icon: yellowbow, acquired: false },
+    { name: 'Flower Crown', price: 50, icon: flowercrown, acquired: false },
   ];
 
   const handlePurchase = (itemName) => {
@@ -25,6 +27,8 @@ const Shop = () => {
       item.name === itemName ? { ...item, acquired: true } : item
     );
     setPurchasedItems(updatedItems);
+    localStorage.setItem("pawCoin", pawCoins - 50);
+    setPawCoins(pawCoins - 50);
     setPopupMessage(`You purchased ${itemName}!`);
     setTimeout(() => setPopupMessage(''), 2000); // Remove popup after 2 seconds
   };
