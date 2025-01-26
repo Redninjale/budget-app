@@ -1,8 +1,8 @@
 import React from 'react';
-import ImageSwitch from '../ImageSwitch';
+import ImageSwitchGacha from '../ImageSwitchGacha';
 import gachaMachine from '../../assets/gachapon1.png';
 import gachaMachine1 from '../../assets/gachapon.gif';
-import coin from '../../assets/coin.png';
+import coin from '../../assets/currencyIcon.png';
 
 const Gacha = () => {
 
@@ -13,7 +13,7 @@ const Gacha = () => {
     {/* </div> */}
     {/* <button className="!bg-transparent !p-0 !border-none"> */}
       {/* <img src={gachaButton} alt="gacha button"  className="flex items-center justify-center bg-transparent" /> */}
-      <ImageSwitch initialGif={gachaMachine} clickedGif={gachaMachine1} delay={4600}></ImageSwitch>
+      <ImageSwitchGacha initialGif={gachaMachine} clickedGif={gachaMachine1} delay={4600}></ImageSwitchGacha>
     {/* </button> */}
     </div>
     <div className="relative w-full h-20">
