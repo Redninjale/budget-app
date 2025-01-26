@@ -4,11 +4,18 @@ import budgetBackground from '../assets/budgetbackground.gif';
 import CategoryList from './Budget/CategoryList';
 import Savings from './Budget/Savings';
 import { getCategoryPurchases } from '../api/categories';
+import { getDailyTask } from '../api/mistral_model';
 
 const Budget = () => {
   const [activeTab, setActiveTab] = useState('Budget'); // State for toggling tabs
   const [selectedCategory, setSelectedCategory] = useState(null); // State to track selected category
   const [showRecapPopup, setShowRecapPopup] = useState(false); // State to track recap popup visibility
+  const [task, setTask] = useState("Spend less than $120 today!");
+  const [monthlySummary, setMonthlySummary] = useState(`
+    In May, $642.77 was spent on Food & Drinks, with the majority going to Claw Cuisine and Whisker Treats. 
+    Consider purchasing in bulk from a single merchant to save on delivery fees. $429.05 was spent on Shopping, with Fur-niture Co. and 
+    Feline Fabrics being the top merchants. Look for sales or discounts to reduce costs in this category. 
+    Overall, $1071.82 was spent in May, with a significant portion going towards Food & Drinks and Shopping.`)
 
   // Hardcoded savings data
   const savingsGoal = 1000;
@@ -131,7 +138,13 @@ const Budget = () => {
       setCategories(updatedCategories);
     };
 
+    const fetchDailyTask = async () => {
+      const newTask = await getDailyTask();
+      setTask(newTask);
+    }
+
     fetchCategoryPurchases();
+    fetchDailyTask();
   }, []);
 
   const calculateMonthlyRecap = () => {
@@ -177,7 +190,7 @@ const Budget = () => {
           <h1 className="text-3xl text-pastel-blue text-center mb-6">Budget</h1>
 
           {/* Daily Task Widget */}
-          <DailyTask task="Spend less than $120 today!" />
+          <DailyTask task={task} />
 
           {/* Monthly Recap Section */}
           <div
@@ -250,6 +263,11 @@ const Budget = () => {
                       ? `Goal Achieved! 🎉`
                       : `$${(savingsGoal - totalSaved).toFixed(2)} left to reach your goal`}
                   </p>
+                </div>
+
+                <div className='mt-5'>
+                  <p className='text-center text-gray-800 font-medium'>Monthly Summary</p>
+                  <p className='text-sm text-gray-800'>{monthlySummary}</p>
                 </div>
               </div>
             </div>
