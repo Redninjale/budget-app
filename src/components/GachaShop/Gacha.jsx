@@ -1,12 +1,18 @@
 import React from 'react';
+import ImageSwitch from '../ImageSwitch';
+import gachaMachine from '../../assets/gachapon1.png';
+import gachaMachine1 from '../../assets/gachapon.gif';
 
 const Gacha = () => {
   return (
-    <div className="text-center">
-      <h1 className="text-2xl font-bold">Gacha Machine</h1>
-      <p className="text-gray-600 mt-2">Roll for a chance to collect new cats!</p>
-      <button className="mt-4 py-2 px-6 bg-yellow-400 text-white rounded-lg">Roll</button>
+    <main className="">
+
+    <div className="flex items-center justify-center">
+      <ImageSwitch initialGif={gachaMachine} clickedGif={gachaMachine1} delay={4600}></ImageSwitch>
     </div>
+
+      {/* <img src={gachaMachine} alt="gacha machine" className="w-1/2 h-1/2" /> */}
+    </main>
   );
 };
 
