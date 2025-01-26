@@ -2,30 +2,37 @@ import React, { useState } from 'react';
 import Gacha from './GachaShop/Gacha';
 import Shop from './GachaShop/Shop';
 
-import shopbutton from '../assets/shopbutton.png';
-import shopbutton2 from '../assets/shopbutton2.png';
-
 const GachaShop = () => {
-  const [view, setView] = useState('gacha');
+  const [activeTab, setActiveTab] = useState('Gacha'); // State for toggling tabs
 
   return (
-    <div className="flex flex-col pt-29 bg-[url('./assets/greenstripe.gif')] bg-cover flex h-screen w-screen">
-      <div className="flex flex-row justify-center space-x-4">
-        <img
-        src={shopbutton}
-          onClick={() => setView('gacha')}
-          className={`w-18 h-19 rounded-lg`}
+    <div
+      className="flex flex-col pt-20 bg-[url('./assets/greenstripe.gif')] bg-cover bg-no-repeat min-h-screen"
+      style={{ backgroundSize: 'cover', height: '100%' }}
+    >
+      {/* Tabs */}
+      <div className="flex text-xl justify-center special-text space-x-4 pt-10">
+        <button
+          className={`px-4 font-bold border-solid border-2 rounded-md shadow-md transition ${
+            activeTab === 'Gacha' ? 'text-green-500' : 'text-gray-400'
+          }`}
+          onClick={() => setActiveTab('Gacha')}
         >
-        </img>
-        <img
-        src={shopbutton2}
-          onClick={() => setView('shop')}
-          className={`w-18 h-19 rounded-lg`}
+          Gacha
+        </button>
+        <button
+          className={`px-4 py-2 font-bold border-solid border-2 rounded-md shadow-md transition ${
+            activeTab === 'Shop' ? 'text-green-500' : 'text-gray-400'
+          }`}
+          onClick={() => setActiveTab('Shop')}
         >
-        </img>
+          Shop
+        </button>
       </div>
-      <div className="mt-2">
-        {view === 'gacha' ? <Gacha /> : <Shop />}
+
+      {/* Content */}
+      <div className="mt-2 flex-grow">
+        {activeTab === 'Gacha' ? <Gacha /> : <Shop />}
       </div>
     </div>
   );
