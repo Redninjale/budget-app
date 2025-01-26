@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import DailyTask from './Budget/DailyTask';
 import budgetBackground from '../assets/budgetbackground.gif';
+import CategoryList from './Budget/CategoryList';
 
 const Budget = () => {
   const [selectedCategory, setSelectedCategory] = useState(null); // State to track selected category
+  const [showRecapPopup, setShowRecapPopup] = useState(false); // State to track recap popup visibility
 
   const categories = [
     {
@@ -102,6 +104,21 @@ const Budget = () => {
     },
   ];
 
+  const calculateMonthlyRecap = () => {
+    const totalSpent = categories.reduce((sum, category) => {
+      return (
+        sum +
+        category.transactions.reduce((total, transaction) => total + parseFloat(transaction.amount), 0)
+      );
+    }, 0);
+
+    const totalBudget = categories.length * 100; // Assume default budget for each category is $100
+
+    return { totalSpent, totalBudget };
+  };
+
+  const { totalSpent, totalBudget } = calculateMonthlyRecap();
+
   return (
     <div
       className="p-4 pt-16 min-h-screen bg-cover bg-center w-screen"
@@ -113,43 +130,46 @@ const Budget = () => {
         {/* Daily Task Widget */}
         <DailyTask task="Spend less than $120 today!" />
 
-        {/* Categories */}
-        <div className="grid grid-cols-2 gap-6 mt-4">
-          {categories.map((category) => (
-            <div
-              key={category.name}
-              className="text-black text-xl py-2 px-2 rounded-lg text-center cursor-pointer hover:bg-pastel-blue hover:shadow-lg transition flex flex-col items-center"
-              onClick={() => setSelectedCategory(category)} // Handle category click
-            >
-              <img src={category.icon} alt={category.name} className="w-40 h-50 mb-2" />
-              <span className="text-xl">{category.name}</span>
-            </div>
-          ))}
+        {/* Monthly Recap Section */}
+        <div
+          className="mt-6 mb-6 border-solid border-4 p-4 rounded-3xl bg-white flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
+          onClick={() => setShowRecapPopup(true)}
+        >
+          <img src={'src/assets/recap_cat.png'} alt="Monthly Recap" className="w-24 h-24" />
+          <p className="text-lg font-bold text-gray-800 mt-2">Monthly Recap</p>
+          <p className="text-sm text-gray-600">Click to see details</p>
         </div>
 
-        {/* Transaction Popup */}
-        {selectedCategory && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        {/* Categories */}
+        <CategoryList
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+
+        {/* Recap Popup */}
+        {showRecapPopup && (
+          <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-md relative">
               <button
-                className="absolute top-2 right-2 bg-red-500 text-black rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-700"
-                onClick={() => setSelectedCategory(null)} // Close the pop-up
+                className="absolute top-2 right-2 bg-gray-700 text-black rounded-full w-6 h-6 flex items-center justify-center hover:bg-gray-800"
+                onClick={() => setShowRecapPopup(false)}
               >
                 &times;
               </button>
-              <h2 className="text-lg font-bold text-center mb-4">{selectedCategory.name}</h2>
-              <ul className="space-y-2">
-                {selectedCategory.transactions.map((transaction, index) => (
-                  <li key={index} className="border border-gray-300 p-3 rounded-md">
-                    <p><strong>Merchant:</strong> {transaction.merchant_id}</p>
-                    <p><strong>Medium:</strong> {transaction.medium}</p>
-                    <p><strong>Date:</strong> {transaction.purchase_date}</p>
-                    <p><strong>Amount:</strong> ${transaction.amount}</p>
-                    <p><strong>Status:</strong> {transaction.status}</p>
-                    <p><strong>Description:</strong> {transaction.description}</p>
-                  </li>
-                ))}
-              </ul>
+              <h2 className="text-lg font-bold text-center mb-4">Monthly Spending Recap</h2>
+              <p className="text-center mb-2 text-gray-800">
+                <strong>Total Spent:</strong> ${totalSpent.toFixed(2)}
+              </p>
+              <p className="text-center mb-4 text-gray-800">
+                <strong>Total Budget:</strong> ${totalBudget.toFixed(2)}
+              </p>
+              <div className="h-4 rounded-lg overflow-hidden bg-gray-200">
+                <div
+                  className={`h-full ${totalSpent > totalBudget ? 'bg-red-500' : 'bg-green-500'}`}
+                  style={{ width: `${Math.min((totalSpent / totalBudget) * 100, 100)}%` }}
+                ></div>
+              </div>
             </div>
           </div>
         )}
