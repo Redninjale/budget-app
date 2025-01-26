@@ -14,7 +14,7 @@ const GifSwitcher = ({ initialGif, clickedGif }) => {
     if (gif === clickedGif) {
       const timer = setTimeout(() => {
         setGif(initialGif); // Revert back to the initial GIF
-      }, 3000); // 3 seconds delay
+      }, 1300); // 3 seconds delay
 
       // Cleanup the timer when the component is unmounted or when gif changes
       return () => clearTimeout(timer);
@@ -24,7 +24,7 @@ const GifSwitcher = ({ initialGif, clickedGif }) => {
   return (
     <img
       src={gif} // Use the current gif source
-      className="absolute top-80 right-1 w-40 h-40 transform scale-80 cursor-pointer"
+      className="cursor-pointer"
       alt="GIF"
       onClick={changeGif} // Change the GIF when clicked
     />
