@@ -49,3 +49,15 @@ h1 {
     background-color: #f9f9f9;
   }
 }
+
+@font-face {
+  font-family: 'CustomFont';
+  src: url('./assets/babydoll.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.special-text {
+  font-family: 'CustomFont', sans-serif;
+}
+
