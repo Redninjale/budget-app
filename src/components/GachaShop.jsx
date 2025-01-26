@@ -6,10 +6,6 @@ import greenBackground from '../assets/greenstripe.gif';
 const GachaShop = () => {
   const [activeTab, setActiveTab] = useState('Gacha'); // State for toggling tabs
 
-  function handleGachaShop() {
-    setActiveTab("Gacha");
-  }
-
   return (
     <div
       className="p-4 pt-25 min-h-screen bg-cover bg-center w-screen"
@@ -20,7 +16,7 @@ const GachaShop = () => {
         <button
           className={`px-4 font-bold border-solid border-2 rounded-md shadow-md transition ${activeTab === 'Gacha' ? 'text-green-500' : 'text-gray-400'
             }`}
-          onClick={() => handleGachaShop}
+          onClick={() => setActiveTab("Gacha")}
         >
           Gacha
         </button>
