@@ -16,7 +16,7 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
     const randomIndex = Math.floor(Math.random() * catsData.cats.length);
     setRandomCat(catsData.cats[randomIndex]);
 
-    // Show the popup after 5 seconds
+    // Show the popup after 4.5 seconds
     setTimeout(() => {
       setShowPopup(true);
     }, 4500); // 4.5 seconds delay
@@ -54,7 +54,13 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
 
       {/* Popup displaying the random cat */}
       {showPopup && randomCat && (
-        <div className="absolute top-1/4 left-1/12 transform -translate-x-1 -translate-y-1 bg-white border rounded-lg shadow-lg p-4 w-5/6 h-">
+        <div className="absolute top-1/2 special-text left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border rounded-lg shadow-lg p-4 w-5/6 max-w-lg">
+          <button
+            className="absolute top-2 right-2 bg-red-500 text-black rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+            onClick={() => setShowPopup(false)} // Close the popup
+          >
+            &times;
+          </button>
           <img
             src={randomCat.icon}
             alt={randomCat.name}

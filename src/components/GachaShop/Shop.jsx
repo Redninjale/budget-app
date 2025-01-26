@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import currency from '../../assets/currencyIcon.png';
-import bow from '../../assets/bow.png';
-import starcollar from '../../assets/starcollar.png';
-import bellbow from '../../assets/bellbow.png';
-import bluebow from '../../assets/bluebow.png';
-import yellowbow from '../../assets/yellowbow.png';
-import flowercrown from '../../assets/flowercrown.png';
+// import currency from '../../assets/currencyIcon.png';
+// import bow from '../../assets/bow.png';
+// import starcollar from '../../assets/starcollar.png';
+// import bellbow from '../../assets/bellbow.png';
+// import bluebow from '../../assets/bluebow.png';
+// import yellowbow from '../../assets/yellowbow.png';
+// import flowercrown from '../../assets/flowercrown.png';
 
 const Shop = () => {
   const [purchasedItems, setPurchasedItems] = useState([]);
