@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import gachaButton from '../assets/wishbutton.png';
 import catsData from '../assets/data/catbook.json';
+import { TicketsContext } from '../App';
 
 const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
   const [gif, setGif] = useState(initialGif); // State to track the current GIF
   const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
   const [randomCat, setRandomCat] = useState(null); // State to store the random cat data
+  const { tickets, setTickets } = useContext(TicketsContext);
 
   // Function to change the GIF on click
   const changeGif = () => {
@@ -16,7 +18,9 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
     const randomIndex = Math.floor(Math.random() * catsData.cats.length);
     setRandomCat(catsData.cats[randomIndex]);
 
-    // Show the popup after 5 seconds
+    localStorage.setItem("tickets", tickets - 1);
+    setTickets(tickets - 1);
+    // Show the popup after 4.5 seconds
     setTimeout(() => {
       setShowPopup(true);
     }, 4500); // 4.5 seconds delay
@@ -54,13 +58,19 @@ const GifSwitcher = ({ initialGif, clickedGif, delay }) => {
 
       {/* Popup displaying the random cat */}
       {showPopup && randomCat && (
-        <div className="absolute top-1/4 left-1/12 transform -translate-x-1 -translate-y-1 bg-white border rounded-lg shadow-lg p-4 w-5/6 h-">
+        <div className="absolute top-1/2 special-text left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-30 backdrop-blur-sm bg-white border-4 border-solid rounded-lg shadow-lg p-6 w-5/6 max-w-lg">
+          <button
+            className="absolute top-2 right-2 bg-red-500 text-black rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+            onClick={() => setShowPopup(false)} // Close the popup
+          >
+            &times;
+          </button>
           <img
             src={randomCat.icon}
             alt={randomCat.name}
-            className="w-32 h-32 mx-auto"
+            className="w-30 h-25 mx-auto"
           />
-          <h2 className="text-xl font-bold text-center mt-4">{randomCat.name}</h2>
+          <h2 className="text-xl text-gray-600 font-bold text-center mt-4">{randomCat.name}</h2>
           <p className="text-gray-600 text-center mt-2">{randomCat.description}</p>
         </div>
       )}

@@ -1,0 +1,61 @@
+{
+    "cats": [
+      {
+        "name": "Snowball",
+        "icon": "src/assets/snowball.png",
+        "description": "A playful white kitten who loves to chase snowflakes and nap in the sun.",
+        "acquired": true
+      },
+      {
+        "name": "Summer",
+        "icon": "src/assets/summer.png",
+        "description": "A golden tabby with a sunny disposition, always ready for an adventure.",
+        "acquired": true
+      },
+      {
+        "name": "Bethany",
+        "icon": "src/assets/bethany.png",
+        "description": "An elegant and calm Siamese cat who adores cozy corners and warm blankets.",
+        "acquired": true
+      }
+    ],
+    "accessories": [
+      {
+        "name": "Bow",
+        "icon": "src/assets/bow.png",
+        "description": "A classic bow for any fashionable feline.",
+        "acquired": true
+      },
+      {
+        "name": "Star Collar",
+        "icon": "src/assets/starcollar.png",
+        "description": "A shiny star-studded collar that sparkles in the light.",
+        "acquired": false
+      },
+      {
+        "name": "Bell Bow",
+        "icon": "src/assets/bellbow.png",
+        "description": "A charming bow with a tiny bell that jingles softly.",
+        "acquired": false
+      },
+      {
+        "name": "Blue Bow",
+        "icon": "src/assets/bluebow.png",
+        "description": "A bright blue bow to make your cat stand out.",
+        "acquired": true
+      },
+      {
+        "name": "Yellow Bow",
+        "icon": "src/assets/yellowbow.png",
+        "description": "A cheerful yellow bow for sunny days.",
+        "acquired": false
+      },
+      {
+        "name": "Flower Crown",
+        "icon": "src/assets/flowercrown.png",
+        "description": "A floral crown for a regal and elegant look.",
+        "acquired": true
+      }
+    ]
+  }
+  
