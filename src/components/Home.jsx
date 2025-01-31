@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
 import ImageSwitch from './ImageSwitch';
-<<<<<<< Updated upstream
-import collectionData from '../assets/data/collection.json'; // Import collection data
-import initialGif1 from '../assets/white-cat-idle.png';
-import otherGif1 from '../assets/white-cat-idle.gif';
-import initialGif2 from '../assets/cat-on-string.png';
-import otherGif2 from '../assets/cat-on-string.gif';
-import initialGif3 from '../assets/orange-cat.png';
-import otherGif3 from '../assets/orange-cat.gif';
-=======
 
 import initialGif1 from "../assets/white-cat-idle.png"; 
 import otherGif1 from "../assets/white-cat-idle.gif"; 
@@ -20,7 +11,6 @@ import otherGif3 from "../assets/orange-cat.gif";
 import catData from '../assets/data/catbook.json'; // JSON file
 import bg from '../assets/homebackground.png';
 
->>>>>>> Stashed changes
 
 const Home = () => {
   const [showCollection, setShowCollection] = useState(false); // Toggle for collection popup
